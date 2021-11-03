@@ -33,7 +33,7 @@ namespace TreeTasksStep.Persistance.Seeds
                     new Step()
                     {
                         Id = Guid.NewGuid(),
-                        Name = "Step 1a",
+                        Name = "Step 1a cu pricina",
                         ParentStep = null,
                         ParentTask = tasks[0],
                     },
@@ -53,15 +53,15 @@ namespace TreeTasksStep.Persistance.Seeds
                         Id = Guid.NewGuid(),
                         Name = "Step 1a.1a",
                         ParentStep = steps[0],
-                        ParentTask = tasks[0],
+                        ParentTask = null,
                     },
                     new Step()
                     {
                         Id = Guid.NewGuid(),
                         Name = "Step 1a.2a",
                         ParentStep = steps[0],
-                        ParentTask = tasks[0],
-                    },
+                        ParentTask = null,
+                    }
                 };
 
                 steps[1].ChildrenSteps = new List<Step>()
@@ -71,14 +71,14 @@ namespace TreeTasksStep.Persistance.Seeds
                         Id = Guid.NewGuid(),
                         Name = "Step 1b.1b",
                         ParentStep = steps[1],
-                        ParentTask = tasks[0],
+                        ParentTask = null,
                     },
                     new Step()
                     {
                         Id = Guid.NewGuid(),
                         Name = "Step 1b.2b",
                         ParentStep = steps[1],
-                        ParentTask = tasks[0],
+                        ParentTask = null,
                     },
                 };
 

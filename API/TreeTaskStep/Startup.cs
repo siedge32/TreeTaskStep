@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using TreeTasksStep.Persistance;
+using System.Text.Json.Serialization;
 
 namespace TreeTaskStep
 {
@@ -24,6 +25,7 @@ namespace TreeTaskStep
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseLazyLoadingProxies();
             });
             services.AddCors(options =>
             {

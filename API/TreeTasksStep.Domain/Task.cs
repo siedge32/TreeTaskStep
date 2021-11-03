@@ -7,6 +7,6 @@ namespace TreeTasksStep.Domain
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Step> Steps { get; set; }
+        public virtual ICollection<Step> Steps { get; set; }
     }
 }
