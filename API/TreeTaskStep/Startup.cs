@@ -7,6 +7,8 @@ using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using TreeTasksStep.Persistance;
 using System.Text.Json.Serialization;
+using TreeTasksStep.Domain;
+using TreeTaskStep.Services;
 
 namespace TreeTaskStep
 {
@@ -34,6 +36,8 @@ namespace TreeTaskStep
                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
                 });
             });
+
+            services.AddTransient<IHierarchyBuilder<Step>, HierarchyBuilder>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
