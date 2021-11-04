@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TreeTasksStep.Domain;
 using TreeTasksStep.Persistance;
 using TreeTaskStep.Dtos.Response;
@@ -31,8 +30,12 @@ namespace TreeTaskStep.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TreeTasksStep.Domain.Task>>> GetTasks()
-            => Ok(await _context.Tasks.ToListAsync());
+        public ActionResult<IEnumerable<TaskResponse>> GetTasks()
+        {
+            var tasks = _context.Tasks.ToList().Select(t => new TaskResponse { Id = t.Id, Name = t.Name });
+            _logger.LogInformation($"Retrieved {tasks.Count()} tasks");
+            return Ok(tasks);
+        }
 
         [HttpGet("test")]
         public ActionResult Test()
@@ -58,6 +61,8 @@ namespace TreeTaskStep.Controllers
                 Name = step.Name
             });
 
+            _logger.LogInformation($"Retrieved {steps.Count()} steps");
+
             return Ok(steps);
         }
 
@@ -72,11 +77,15 @@ namespace TreeTaskStep.Controllers
                 return BadRequest();
             }
 
-            return Ok(stepTree.Children.ToList().Select(step => new StepResponse
+            var substeps = stepTree.Children.ToList().Select(step => new StepResponse
             {
                 Id = step.Data.Id,
                 Name = step.Data.Name
-            }));
+            });
+
+            _logger.LogInformation($"Retrieved {substeps.Count()} substeps");
+
+            return Ok(substeps);
         }
     }
 }

@@ -27,8 +27,9 @@ namespace TreeTaskStep
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-                options.UseLazyLoadingProxies();
+                // options.UseLazyLoadingProxies();
             });
+
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", policy =>
